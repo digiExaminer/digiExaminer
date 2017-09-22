@@ -30,6 +30,16 @@
                 controller: 'TestSeriesViewController',
                 templateUrl: 'testseries/testseriesviewController.html',
                 controllerAs: 'vm'
+            }) 
+            .when('/:id/:name', {
+                controller: 'TestSeriesNumberViewController',
+                templateUrl: 'testModule/testseriesNumberviewController.html',
+                controllerAs: 'vm'
+            })      
+            .when('/:id/:name/start', {
+                controller: 'examController',
+                templateUrl: 'exam/exam.html',
+                controllerAs: 'vm'
             })            
             
 

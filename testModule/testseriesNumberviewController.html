@@ -30,7 +30,7 @@
 <div class="cards paddingCards">
 
    <div class="card childmodule" ng-repeat="task in allTestseries">
-        <img ng-src={{task.imgUrl}}>
+            <img ng-src={{task.imgUrl}}>
         <div class="card-title">
             <div ng-click="playAnimation()" class="toggle-info btn">
                 <span class="left"></span>
@@ -46,7 +46,7 @@
             </div>
             <div class="card-flap flap2">
                 <div class="card-actions">
-                    <div  ng-click="getnextLevel(task.name,task.id)"  class="btn">SELECT TEST SERIES</div>
+                    <div  ng-click="getnextLevel(task.name,task.id,'start')"  class="btn">SELECT TEST SERIES</div>
                 </div>
             </div>
         </div>

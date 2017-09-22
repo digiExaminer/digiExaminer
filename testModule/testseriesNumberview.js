@@ -3,22 +3,13 @@
 
     angular
         .module('app')
-        .controller('HomeController', HomeController);
+        .controller('TestSeriesNumberViewController', TestSeriesNumberViewController);
 
-    HomeController.$inject = ['$location','$scope','UserService', '$rootScope'];
-    function HomeController($location,$scope,UserService, $rootScope) {
+    TestSeriesNumberViewController.$inject = ['$location','$scope','UserService', '$rootScope'];
+    function TestSeriesNumberViewController($location,$scope,UserService, $rootScope) {
         var vm = this;
 
-        vm.user = null;
-        vm.allUsers = [];
-     
-
-        initController();
-       
-        function initController() {
-            loadCurrentUser();
-            
-        }
+   
         var isShowing = false;
         $scope.playAnimation=function () {
         var zindex = 10;
@@ -64,19 +55,10 @@
 
         });
     }
-         $scope.allTestseries=[{id:1,'name':'test1',imgUrl:'img/ssc.jpg',permission:1}, {id:2,'name':'test2',imgUrl:'img/banking.jpg',permission:0}, {id:3,'name':'test3',imgUrl:'img/image1.jpg',permission:1},{id:4,'name':'test4',imgUrl:'img/ssc.jpg',permission:1},{id:5,'name':'test5',imgUrl:'img/banking.jpg',permission:1},{id:6,'name':'test6',imgUrl:'img/image1.jpg',permission:0}];
-        $scope.getnextLevel=function(testId){
-        $location.path('/'+testId);
+         $scope.allTestseries=[{id:1,'name':'test111',imgUrl:'img/ssc.jpg'}, {id:2,'name':'test222',imgUrl:'img/banking.jpg'}, {id:3,'name':'test333',imgUrl:'img/image1.jpg'},{id:4,'name':'test444',imgUrl:'img/ssc.jpg'},{id:5,'name':'test555',imgUrl:'img/banking.jpg'},{id:6,'name':'test666',imgUrl:'img/image1.jpg'}];
+        $scope.getnextLevel=function(name,testId,action){
+      $location.path('/'+name+'/'+testId+'/'+action);
         }
-        function loadCurrentUser() {
-            UserService.GetByUsername($rootScope.globals.currentUser.username)
-                .then(function (user) {
-                    vm.user = user;
-                });
-        }
-
-
-
 
     }
 

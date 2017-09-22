@@ -1,0 +1,63 @@
+<style>
+.single-page-quiz .quizzin-question, .single-page-quiz #action-button {
+	display: block;
+}
+
+
+.paddingqblock{
+margin-bottom:5px;
+padding:10px;
+}
+</style>
+<div class="" style="width: 100% !important;">
+	<div class="row backgrounggrey"
+		style="padding-top: 7%; padding-left: 2%;">
+
+		<div class="col-sm-8 col-md-8 ">
+			<div class="borderblack paddingqblock" ng-if="currentDirection.length!=0">
+				<p><strong>
+				{{currentDirection.id}} . {{currentDirection.dirdescmain}}
+				</strong>
+				</p>
+				<ul>
+				<li ng-repeat="option in currentDirection.totaldirection"><span>{{option.displayvalue}}</span><span>{{option.dirdesc}}</span></li>
+				
+				</ul>
+			</div>
+			<div class="quizzin-question borderblack paddingqblock" id="question-1">
+				<div class="question-content">
+					<strong>{{current.questinId}} .</strong>{{current.questindesc}}
+				</div>
+				<br> <input type="hidden" name="question_id[]" value="2">
+				<input type="radio" name="answer-2" id="answer-id-105"
+					class="answer answer-1 " value="105"> <label
+					for="answer-id-105" id="answer-label-105" class=" answer label-1"><span>{{current.option[0]}}
+				</span> </label><br>
+				<input type="radio" name="answer-2" id="answer-id-106"
+					class="answer answer-1 " value="106"> <label
+					for="answer-id-106" id="answer-label-106" class=" answer label-1"><span>{{current.option[1]}}
+				</span></label> <br>
+				<input type="radio" name="answer-2" id="answer-id-107"
+					class="answer answer-1 " value="107"> <label
+					for="answer-id-107" id="answer-label-107" class=" answer label-1"><span>{{current.option[2]}}
+				</span> </label><br>
+				<input type="radio" name="answer-2" id="answer-id-108"
+					class="answer answer-1 " value="108"> <label
+					for="answer-id-108" id="answer-label-108" class=" answer label-1"><span>{{current.option[3]}}</span></label><br>
+			</div>
+			
+		</div>
+		<div class="col-sm-4 col-md-4">
+			<img src="img/banking.jpg" style="width: 98%;">
+		</div>
+	</div>
+	<div class="row backgrounggrey" style="padding-top: 2%;">
+		<div class="col-sm-12 backgrounggrey" style="text-align: center;">
+			<button type="button" class="btn btn-info "
+				ng-click="nextquestion(current.questinId)">Next</button>
+				
+				<button type="button" class="btn btn-info "
+				ng-click="prevQuestion(current.questinId)">Previous</button>
+		</div>
+	</div>
+</div>

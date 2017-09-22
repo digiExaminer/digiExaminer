@@ -5,8 +5,8 @@
         .module('app')
         .controller('TestSeriesViewController', TestSeriesViewController);
 
-    TestSeriesViewController.$inject = ['$scope','UserService', '$rootScope'];
-    function TestSeriesViewController($scope,UserService, $rootScope) {
+    TestSeriesViewController.$inject = ['$location','$scope','UserService', '$rootScope'];
+    function TestSeriesViewController($location,$scope,UserService, $rootScope) {
         var vm = this;
 
    
@@ -55,9 +55,9 @@
 
         });
     }
-        $scope.allTestseries=[{id:1,'name':'test11'}, {id:2,'name':'test22'}, {id:3,'name':'test33'},{id:4,'name':'test44'},{id:5,'name':'test55'},{id:6,'name':'test66'}];
-        $scope.getnextLevel=function(testId){
-            alert(testId);
+        $scope.allTestseries=[{id:1,'name':'test11',imgUrl:'img/ssc.jpg'}, {id:2,'name':'test22',imgUrl:'img/banking.jpg'}, {id:3,'name':'test33',imgUrl:'img/image1.jpg'},{id:4,'name':'test44',imgUrl:'img/ssc.jpg'},{id:5,'name':'test55',imgUrl:'img/banking.jpg'},{id:6,'name':'test66',imgUrl:'img/image1.jpg'}];
+        $scope.getnextLevel=function(name,testId){
+         $location.path('/'+name+'/'+testId);
         }
 
     }
