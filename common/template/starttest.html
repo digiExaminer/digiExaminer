@@ -1,4 +1,30 @@
 <style>
+
+.wrap {
+ 
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+
+
+}
+
+.time-to {
+  text-align: center;
+  font-family: Bangers;
+  color: white;
+  font-size: 35px;
+  letter-spacing: 2px;
+}
+.time-to span {
+  display: block;
+  font-size: 80px;
+  color: red;
+}
+
 .single-page-quiz .quizzin-question, .single-page-quiz #action-button {
 	display: block;
 }
@@ -8,6 +34,16 @@
 margin-bottom:5px;
 padding:10px;
 }
+  #circle {
+  	  text-align:center;
+  	      padding: 13px;
+      width: 50px;
+      height: 50px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      border-radius: 25px;
+      background: red;
+    }
 </style>
 <div class="" style="width: 100% !important;">
 	<div class="row backgrounggrey"
@@ -28,27 +64,41 @@ padding:10px;
 				<div class="question-content">
 					<strong>{{current.questinId}} .</strong>{{current.questindesc}}
 				</div>
-				<br> <input type="hidden" name="question_id[]" value="2">
-				<input type="radio" name="answer-2" id="answer-id-105"
-					class="answer answer-1 " value="105"> <label
+			<form>
+				<input type="radio"
+					class="answer answer-1 " > <label
 					for="answer-id-105" id="answer-label-105" class=" answer label-1"><span>{{current.option[0]}}
 				</span> </label><br>
-				<input type="radio" name="answer-2" id="answer-id-106"
-					class="answer answer-1 " value="106"> <label
+				<input type="radio" 
+					class="answer answer-1 " > <label
 					for="answer-id-106" id="answer-label-106" class=" answer label-1"><span>{{current.option[1]}}
 				</span></label> <br>
-				<input type="radio" name="answer-2" id="answer-id-107"
-					class="answer answer-1 " value="107"> <label
+				<input type="radio"
+					class="answer answer-1 " > <label
 					for="answer-id-107" id="answer-label-107" class=" answer label-1"><span>{{current.option[2]}}
 				</span> </label><br>
-				<input type="radio" name="answer-2" id="answer-id-108"
-					class="answer answer-1 " value="108"> <label
-					for="answer-id-108" id="answer-label-108" class=" answer label-1"><span>{{current.option[3]}}</span></label><br>
+				<input type="radio" 
+					class="answer answer-1 "> <label
+					for="answer-id-108" id="answer-label-108" class=" answer label-1"><span>{{current.option[3]}}</span></label>
+					</form>
+					<br>
 			</div>
 			
 		</div>
 		<div class="col-sm-4 col-md-4">
-			<img src="img/banking.jpg" style="width: 98%;">
+		<div class='wrap' >
+  <div class='time-to'>
+    <span countdown='' date='' >&nbsp;</span>
+  </div>
+</div>
+			<div style="min-height:305px;width:100%;background-color:white;border:1px solid black;">
+			<table>
+			<tr ng-repeat="questionrow in totalquestion"><td ng-repeat="questionrowtd in questionrow.totaldirection" style="    padding-left: 15px;"><div id="circle" ng-click="nextquestion(questionrowtd.id-1)">{{questionrowtd.id}}</div><td></tr>
+			</table>
+			</div>
+			<div style="min-height:100px;width:100%;background-color:black;">
+			
+			</div>
 		</div>
 	</div>
 	<div class="row backgrounggrey" style="padding-top: 2%;">
@@ -57,7 +107,7 @@ padding:10px;
 				ng-click="nextquestion(current.questinId)">Next</button>
 				
 				<button type="button" class="btn btn-info "
-				ng-click="prevQuestion(current.questinId)">Previous</button>
+				ng-click="prevquestion(current.questinId)">Previous</button>
 		</div>
 	</div>
 </div>
