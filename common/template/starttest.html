@@ -1,113 +1,64 @@
-<style>
+<div class="container-fluid">
+<div id="quiz" class="row" style="    margin-top: 6%;">
+    
+<div class="col-sm-12"><h1 class="center">{{quiz.name}}</h1></div>
+    <div ng-show="mode=='quiz'" class="col-md-8">
+    	      <div  ng-repeat="instruction in filteredQuestionsInstruction">
+            
+            <div class="questiondesc" ng-if="instruction.type=='words'">
+                <p>{{instruction.Id}}. {{instruction.descheading}}</p>
+                <div class="options">
+                    <ul  type="number">
+                        <li ng-repeat="description in instruction.desc">{{description.statement}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div ng-if="instruction.type=='img'">
+            <img ng-src="../../img/{{instruction.imgurl}}">
+            </div>
+        </div>
+    	
+        <div ng-repeat="question in filteredQuestions">
+            <div class="label label-warning">Question {{currentPage}} of {{totalItems}}.</div>
+            <div class="question">
+                <p>{{currentPage}}. {{question.Name}}</p>
+                <div class="options">
+                    <div ng-repeat="option in question.Options">
+                        <label for="{{option.Id}}">
+                            <input id="{{option.Id}}" type="checkbox" ng-model="option.Selected" ng-change="onSelect(question, option);" />
+                            {{option.Name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="quizNav">
+            <div>
+                <button class="btn btn-success" ng-show="config.allowBack" ng-click="goTo(1);">First</button>
+                <button class="btn btn-danger" ng-show="config.allowBack" ng-click="goTo(currentPage - 1);">Prev</button>
+                <button class="btn btn-danger"                            ng-click="goTo(currentPage + 1);">Next</button>
+                <button class="btn btn-success" ng-show="config.allowBack" ng-click="goTo(totalItems);">Last</button>
+                <button class="btn btn-success" ng-show="config.allowBack" ng-click="markedReview();">Mark for Review</button>
+            </div>
+            <br />
+            <pagination ng-show="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+        </div>
+    </div>
+    <div class="review col-md-4" ng-show="mode=='quiz'" >
+    <div class="label label-warning" style="display:block;    text-align: -webkit-right;"><p class="timer-block">{{h}}h :{{m}}m: {{s}}S</p></div>
+    <div class="label label-warning" style="display:block;">Review Your Answer</div>
+    
+        <div ng-repeat="question in questions">
+            <div ng-click="goTo($index + 1)" class="{{ isAnswered($index) == 'Answered'? 'answered':(isAnswered($index) == 'Reviewed' ? 'Reviewed' : 'not-answered')  }}">{{$index + 1}}</div>
+        </div>
+    </div>
 
-.wrap {
- 
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-
-
-}
-
-.time-to {
-  text-align: center;
-  font-family: Bangers;
-  color: white;
-  font-size: 35px;
-  letter-spacing: 2px;
-}
-.time-to span {
-  display: block;
-  font-size: 80px;
-  color: red;
-}
-
-.single-page-quiz .quizzin-question, .single-page-quiz #action-button {
-	display: block;
-}
-
-
-.paddingqblock{
-margin-bottom:5px;
-padding:10px;
-}
-  #circle {
-  	  text-align:center;
-  	      padding: 13px;
-      width: 50px;
-      height: 50px;
-      -webkit-border-radius: 25px;
-      -moz-border-radius: 25px;
-      border-radius: 25px;
-      background: red;
-    }
-</style>
-<div class="" style="width: 100% !important;">
-	<div class="row backgrounggrey"
-		style="padding-top: 7%; padding-left: 2%;">
-
-		<div class="col-sm-8 col-md-8 ">
-			<div class="borderblack paddingqblock" ng-if="currentDirection.length!=0">
-				<p><strong>
-				{{currentDirection.id}} . {{currentDirection.dirdescmain}}
-				</strong>
-				</p>
-				<ul>
-				<li ng-repeat="option in currentDirection.totaldirection"><span>{{option.displayvalue}}</span><span>{{option.dirdesc}}</span></li>
-				
-				</ul>
-			</div>
-			<div class="quizzin-question borderblack paddingqblock" id="question-1">
-				<div class="question-content">
-					<strong>{{current.questinId}} .</strong>{{current.questindesc}}
-				</div>
-			<form>
-				<input type="radio"
-					class="answer answer-1 " > <label
-					for="answer-id-105" id="answer-label-105" class=" answer label-1"><span>{{current.option[0]}}
-				</span> </label><br>
-				<input type="radio" 
-					class="answer answer-1 " > <label
-					for="answer-id-106" id="answer-label-106" class=" answer label-1"><span>{{current.option[1]}}
-				</span></label> <br>
-				<input type="radio"
-					class="answer answer-1 " > <label
-					for="answer-id-107" id="answer-label-107" class=" answer label-1"><span>{{current.option[2]}}
-				</span> </label><br>
-				<input type="radio" 
-					class="answer answer-1 "> <label
-					for="answer-id-108" id="answer-label-108" class=" answer label-1"><span>{{current.option[3]}}</span></label>
-					</form>
-					<br>
-			</div>
-			
-		</div>
-		<div class="col-sm-4 col-md-4">
-		<div class='wrap' >
-  <div class='time-to'>
-    <span countdown='' date='' >&nbsp;</span>
-  </div>
+    
+    <div class="col-md-12" ng-show="mode!='result'" style="text-align:center;">
+        <hr>
+        
+        <button class="btn btn-success" ng-click="onSubmit();">Submit Quiz</button>
+    </div>
 </div>
-			<div style="min-height:305px;width:100%;background-color:white;border:1px solid black;">
-			<table>
-			<tr ng-repeat="questionrow in totalquestion"><td ng-repeat="questionrowtd in questionrow.totaldirection" style="    padding-left: 15px;"><div id="circle" ng-click="nextquestion(questionrowtd.id-1)">{{questionrowtd.id}}</div><td></tr>
-			</table>
-			</div>
-			<div style="min-height:100px;width:100%;background-color:black;">
-			
-			</div>
-		</div>
-	</div>
-	<div class="row backgrounggrey" style="padding-top: 2%;">
-		<div class="col-sm-12 backgrounggrey" style="text-align: center;">
-			<button type="button" class="btn btn-info "
-				ng-click="nextquestion(current.questinId)">Next</button>
-				
-				<button type="button" class="btn btn-info "
-				ng-click="prevquestion(current.questinId)">Previous</button>
-		</div>
-	</div>
 </div>

@@ -23,221 +23,8 @@ angular.module('app')
 				}
 			});
 		}
-		$scope.allTestseriesQuestion = [ {
-			questinId : 1,
-			'questindesc' : 'Which of the following is a subset of  {b, c, d}?1',
-			option : [ 'a', '100', '500', '400' ],
-			qdirectionId:1
-		},
-			{
-				questinId : 2,
-				'questindesc' : 'Which of the following is a subset of  {b, c, d}?2',
-				option : [ 'a', '100', '500', '400' ],
-				qdirectionId:1
-			},
-			{
-				questinId : 3,
-				'questindesc' : 'Which of the following is a subset of  {b, c, d}?3',
-				option : [ 'a', '100', '500', '400' ],
-				qdirectionId:1
-			},
-			{
-				questinId : 4,
-				'questindesc' : 'Which of the following is a subset of  {b, c, d}?4',
-				option : [ 'a', '100', '500', '400' ],
-				qdirectionId:2
-			},
-			{
-				questinId : 5,
-				'questindesc' : 'Which of the following is a subset of  {b, c, d}?5',
-				option : [ 'a', '100', '500', '400' ],
-				qdirectionId:2
-			},
-			{
-				questinId : 6,
-				'questindesc' : 'Which of the following is a subset of  {b, c, d}?6',
-				option : [ 'a', '100', '500', '400' ],
-				qdirectionId:'0'
-			} ];
-		$scope.qdirection = { 
-				
-				"1" : {
-					id : 1,
-					dirdescmain : "hi you have to go through this",
-					totaldirection : [ {
-						id : 1,
-						displayvalue : "(A)",
-						dirdesc : "you can't go left"
-					}, {
-						id : 2,
-						displayvalue : "(B)",
-						dirdesc : "you can't go left"
-					},
-						{
-							id : 3,
-							displayvalue : "(C)",
-							dirdesc : "you can't go left"
-						}, {
-							id : 4,
-							displayvalue : "(D)",
-							dirdesc : "you can't go left"
-						}, {
-							id : 5,
-							displayvalue : "(E)",
-							dirdesc : "you can't go left"
-						}
-
-					]
-				
-			},
-						"2" : {
-					id : 1,
-					dirdescmain : "hi you have to go through this 2",
-					totaldirection : [ {
-						id : 1,
-						displayvalue : "(A)",
-						dirdesc : "you can't go left2"
-					}, {
-						id : 2,
-						displayvalue : "(B)",
-						dirdesc : "you can't go left"
-					},
-						{
-							id : 3,
-							displayvalue : "(C)",
-							dirdesc : "you can't go left"
-						}, {
-							id : 4,
-							displayvalue : "(D)",
-							dirdesc : "you can't go left"
-						}, {
-							id : 5,
-							displayvalue : "(E)",
-							dirdesc : "you can't go left"
-						}
-
-					]
-				
-			}
-			
-	  
-	};
-		$scope.current = $scope.allTestseriesQuestion[0];
-		qdirectionid=$scope.current.qdirectionId;
-		if($scope.qdirection[qdirectionid]!=undefined || $scope.qdirection[qdirectionid]!='undefined' || $scope.qdirection[qdirectionid]!='')
-		{
-			$scope.currentDirection=$scope.qdirection[qdirectionid];
-			
-		}else{
-			$scope.currentDirection=[];
-			
-		}
-		$scope.nextquestion = function(id) {
-			if (id < $scope.allTestseriesQuestion.length) {
-				$scope.current = $scope.allTestseriesQuestion[id];
-				qdirectionid=$scope.current.qdirectionId;
-				if($scope.qdirection[qdirectionid]!=undefined && $scope.qdirection[qdirectionid]!='')
-				{
-					$scope.currentDirection=$scope.qdirection[qdirectionid];
-					
-				}else{
-					$scope.currentDirection=[];
-					
-				}
-				
-			}
-		};
-		$scope.prevquestion = function(id) {
-			currentprev=id-2;
-			if (currentprev < $scope.allTestseriesQuestion.length && currentprev>=0) {
-				$scope.current = $scope.allTestseriesQuestion[currentprev];
-				qdirectionid=$scope.current.qdirectionId;
-				if($scope.qdirection[qdirectionid]!=undefined && $scope.qdirection[qdirectionid]!='')
-				{
-					$scope.currentDirection=$scope.qdirection[qdirectionid];
-					
-				}else{
-					$scope.currentDirection=[];
-					
-				}
-				
-			}
-		}
-		$rootScope.totalquestion={ 
-				
-				"1" : {
-				
-					totaldirection : [ {
-						id : 1
-				
-					}, {
-						id : 2
-					
-					},
-						{
-							id : 3
-						}, {
-							id : 4
-						}, {
-							id : 5
-						}
-
-					]
-				
-			},
-						"2" : {
-				
-					totaldirection : [ {
-						id : 21
-				
-					}, {
-						id : 22
-					
-					},
-						{
-							id : 23
-						}, {
-							id : 24
-						}, {
-							id : 25
-						}
-
-					]
-				
-			},
-			"3" : {
-				
-					totaldirection : [ {
-						id : 31
-				
-					}, {
-						id : 32
-					
-					},
-						{
-							id : 33
-						}, {
-							id : 34
-						}, {
-							id : 35
-						}
-
-					]
-				
-			}
-					
-				
-			}
-		console.log($rootScope.totalquestion);
-			
-
-
-	} ]).filter('slice', function() {
-		cars=$rootScope.totalquestion;
-		  return function(cars, start, end) {
-			    return cars.slice(start, end);
-			  };
-			})
+		
+	} ])
 	.directive('instruction', function() {
 		return {
 			restrict : 'E',
@@ -251,40 +38,186 @@ angular.module('app')
 		restrict : 'E',
 		replace : false,
 		transclude : true,
-		controller : 'instructionctrl',
+		controller : 'quizCtrl',
 		templateUrl : 'common/template/starttest.html'
 	};
-}).directive('countdown', [
-    'Util', '$interval', function(Util, $interval) {
-        return {
-          restrict: 'A',
-          scope: {
-            date: '@'
-          },
-          link: function(scope, element) {
-            var future;
-            date='October 2, 2017 4:00:00';
-            future = new Date(date);
-            $interval(function() {
-              var diff;
-              diff = Math.floor((future.getTime() - new Date().getTime()) / 1000);
-              return element.text(Util.dhms(diff));
-            }, 1000);
-          }
-        };
-      }
-    ]).factory('Util', [
-      function() {
-        return {
-          dhms: function(t) {
-            var hours, minutes, seconds;
-            hours = Math.floor(t / 3600) % 24;
-            t -= hours * 3600;
-            minutes = Math.floor(t / 60) % 60;
-            t -= minutes * 60;
-            seconds = t % 60;
-            return [hours + 'h', minutes + 'm', seconds + 's'].join(' ');
-          }
-        };
-      }
-    ]);;
+});
+
+
+var quizCtrl = function ($scope, $http, helper,$timeout) {
+    /***********timer************/
+    //Adding initial value for counter
+    //counter modelimiz için ilk değer atamasını yaptık.   
+   $scope.counter = 3200;
+   var stopped;
+
+   //timeout function
+   //1000 milliseconds = 1 second
+   //Every second counts
+   //Cancels a task associated with the promise. As a result of this, the //promise will be resolved with a rejection.  
+   $scope.countdown = function() {
+       stopped = $timeout(function() {
+         if($scope.counter>0){
+        	 if($scope.counter<300){
+        		 angular.element(document).find('.timer-block').css("color","red");
+        	 }
+         
+        $scope.counter--;
+       $scope.h = Math.floor($scope.counter / 3600);
+       $scope.m = Math.floor($scope.counter % 3600 / 60);
+       $scope.s = Math.floor($scope.counter % 3600 % 60);
+        $scope.countdown();   
+       }else{
+         $timeout.cancel(stopped);
+       }}, 1000);
+     };
+      
+       
+   $scope.stop = function(){
+      $timeout.cancel(stopped);
+       
+       } 
+/*****************end timer ***************/
+	$scope.countdown();
+    $scope.quizName = 'data/csharp.js';
+
+    //Note: Only those configs are functional which is documented at: http://www.codeproject.com/Articles/860024/Quiz-Application-in-AngularJs
+    // Others are work in progress.
+    $scope.defaultConfig = {
+        'allowBack': true,
+        'allowReview': true,
+        'autoMove': false,  // if true, it will move to next question automatically when answered.
+        'duration': 0,  // indicates the time in which quiz needs to be completed. post that, quiz will be automatically submitted. 0 means unlimited.
+        'pageSize': 1,
+        'requiredAll': false,  // indicates if you must answer all the questions before submitting.
+        'richText': false,
+        'shuffleQuestions': false,
+        'shuffleOptions': false,
+        'showClock': true,
+        'showPager': true,
+        'theme': 'none'
+    }
+	$scope.currentQuestion;
+	$scope.currentOption;
+
+    $scope.goTo = function (index) {
+    	
+        if (index > 0 && index <= $scope.totalItems) {
+        	$scope.currentQuestion=question="";
+        	$scope.currentOption=option="";
+            $scope.currentPage = index;
+            $scope.mode = 'quiz';
+        }
+    }
+
+    $scope.onSelect = function (question, option) {
+    	$scope.currentQuestion=question;
+    	$scope.currentOption=option;
+        if (question.QuestionTypeId == 1) {
+            question.Options.forEach(function (element, index, array) {
+            	 element.isReviewed = false;
+                if (element.Id != option.Id) {
+                    element.Selected = false;
+                    //question.Answered = element.Id;
+                }
+            });
+        }
+
+       
+    }
+    $scope.markedReview= function () {
+    	$scope.currentQuestion;
+    	$scope.currentOption;
+    	if($scope.currentQuestion!="" && $scope.currentOption!=""){
+        if ($scope.currentQuestion.QuestionTypeId == 1) {
+        	$scope.currentQuestion.Options.forEach(function (element, index, array) {
+                
+                	
+                    element.isReviewed = true;
+                    //question.Answered = element.Id;
+                
+            });
+        }
+
+    	}
+    }
+    $scope.onSubmit = function () {
+        var answers = [];
+        $scope.questions.forEach(function (q, index) {
+            answers.push({ 'QuizId': $scope.quiz.Id, 'QuestionId': q.Id, 'Answered': q.Answered,isReviewed });
+        });
+        // Post your data to the server here. answers contains the questionId and the users' answer.
+        //$http.post('api/Quiz/Submit', answers).success(function (data, status) {
+        //    alert(data);
+        //});
+        console.log($scope.questions);
+        $scope.mode = 'result';
+    }
+
+    $scope.pageCount = function () {
+        return Math.ceil($scope.questions.length / $scope.itemsPerPage);
+    };
+
+    //If you wish, you may create a separate factory or service to call loadQuiz. To keep things simple, i have kept it within controller.
+    $scope.loadQuiz = function (file) {
+        $http.get(file)
+         .then(function (res) {
+             $scope.quiz = res.data.quiz;
+             $scope.instructions = res.data.questionsInstruction;
+             console.log($scope.instructions);
+             $scope.config = helper.extend({}, $scope.defaultConfig, res.data.config);
+             $scope.questions = $scope.config.shuffleQuestions ? helper.shuffle(res.data.questions) : res.data.questions;
+             $scope.totalItems = $scope.questions.length;
+             $scope.itemsPerPage = $scope.config.pageSize;
+             $scope.currentPage = 1;
+             $scope.mode = 'quiz';
+
+             $scope.$watch('currentPage + itemsPerPage', function () {
+                 var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
+                   end = begin + $scope.itemsPerPage;
+
+                 $scope.filteredQuestions = $scope.questions.slice(begin, end);
+                 instrucionid=$scope.filteredQuestions[0].instructionid;
+                 $scope.filteredQuestionsInstruction = $.map($scope.instructions, function(val) {
+                	    return val.Id == instrucionid ? val: [];
+                 });
+                 
+                 console.log($scope.filteredQuestionsInstruction+"ins");
+                 
+             });
+         });
+    }
+    $scope.loadQuiz($scope.quizName);
+
+    $scope.isAnswered = function (index) {
+        var answered = 'Not Answered';
+        $scope.questions[index].Options.forEach(function (element, index, array) {
+            if (element.Selected == true && element.isReviewed==false) {
+                answered = 'Answered';
+                return false;
+            }
+            else if(element.Selected == true && element.isReviewed == true){
+            	 answered = 'Reviewed';
+                 return false;
+            }
+        });
+        return answered;
+    };
+
+    $scope.isCorrect = function (question) {
+        var result = 'correct';
+        question.Options.forEach(function (option, index, array) {
+            if (helper.toBool(option.Selected) != option.IsAnswer) {
+                result = 'wrong';
+                return false;
+            }
+        });
+        return result;
+    };
+
+    
+    
+}
+
+quizCtrl.$inject = ['$scope', '$http', 'helperService','$timeout'];
+angular.module('app').controller('quizCtrl', quizCtrl);
